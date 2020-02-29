@@ -22,18 +22,4 @@ export default class Dashboard extends Vue {}
 
 
 <style>
-.sidebar {
-  background: #404040;
-}
-#main {
-}
-
-.company-header-logo {
-  background: #f36a5a;
-  overflow: hidden;
-}
-
-.company-header-logo .sidebar-header-text {
-  color: #ffffff;
-}
 </style>
