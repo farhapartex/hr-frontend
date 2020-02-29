@@ -33,6 +33,16 @@ const routes = [
                         name: "groupList",
                         component: () => import("./components/DataTable.vue"),
                     },
+                    {
+                        path: "new-group",
+                        name: "newGroup",
+                        component: () => import("./components/Form.vue"),
+                    },
+                    {
+                        path: "group-edit",
+                        name: "editGroup",
+                        component: () => import("./components/Form.vue"),
+                    },
                 ]
             },
         ]
