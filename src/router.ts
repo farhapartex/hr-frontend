@@ -22,6 +22,19 @@ const routes = [
                 name: "dashboard",
                 component: () => import("./components/Dashboard.vue"),
             },
+            {
+                path: "access-group",
+                name: "accessGroup",
+                redirect: { name: 'groupList' },
+                component: () => import("./components/AccessGroup.vue"),
+                children: [
+                    {
+                        path: "group-list",
+                        name: "groupList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                ]
+            },
         ]
     },
 ];
