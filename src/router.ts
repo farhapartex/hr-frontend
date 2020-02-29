@@ -1,24 +1,28 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './views/Home.vue';
+import Base from './views/Base.vue';
+import Auth from './views/Auth.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
-    },
-    {
         path: '/auth',
         name: 'auth',
-        component: () => import('./views/Auth.vue'),
+        component: Auth,
     },
     {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: () => import('./views/Dashboard.vue'),
+        path: '/',
+        name: 'base',
+        component: Base,
+        redirect: { name: 'dashboard' },
+        children: [
+            {
+                path: "dashboard",
+                name: "dashboard",
+                component: () => import("./components/Dashboard.vue"),
+            },
+        ]
     },
 ];
 
