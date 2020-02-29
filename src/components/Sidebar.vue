@@ -17,17 +17,53 @@
         <li>
           <a href="#" @click="verticalNavToggle(0)">
             <span class="mr-3">
-              <i class="fas fa-users-cog"></i>
+              <i class="far fa-snowflake"></i>
             </span>
-            <span>Employee</span>
-            <span class="float-right">
+            <span>Service</span>
+            <span class="float-right" v-if="subMenuList[0]==false">
               <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
             </span>
           </a>
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[0]==true" transition="v-fade">
               <li>
-                <a href="#">Employee List</a>
+                <a href="#">Daily Attendence</a>
+              </li>
+              <li>
+                <a href="#">Visit Application</a>
+              </li>
+              <li>
+                <a href="#">Extra Work</a>
+              </li>
+            </ul>
+          </transition>
+        </li>
+        <li>
+          <a href="#" @click="verticalNavToggle(0)">
+            <span class="mr-3">
+              <i class="fas fa-funnel-dollar"></i>
+            </span>
+            <span>Salary</span>
+            <span class="float-right" v-if="subMenuList[0]==false">
+              <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </a>
+          <transition name="fade">
+            <ul class="sub-navlist" v-if="subMenuList[0]==true" transition="v-fade">
+              <li>
+                <a href="#">Daily Attendence</a>
+              </li>
+              <li>
+                <a href="#">Visit Application</a>
+              </li>
+              <li>
+                <a href="#">Extra Work</a>
               </li>
             </ul>
           </transition>
@@ -35,15 +71,39 @@
         <li>
           <a href="#" @click="verticalNavToggle(1)">
             <span class="mr-3">
-              <i class="fas fa-warehouse"></i>
+              <i class="fas fa-users-cog"></i>
             </span>
-            <span>Management</span>
-            <span class="float-right">
+            <span>Employee</span>
+            <span class="float-right" v-if="subMenuList[1]==false">
               <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
             </span>
           </a>
           <transition name="fade">
-            <ul class="sub-navlist" v-if="subMenuList[1]==true">
+            <ul class="sub-navlist" v-if="subMenuList[1]==true" transition="v-fade">
+              <li>
+                <a href="#">Employee List</a>
+              </li>
+            </ul>
+          </transition>
+        </li>
+        <li>
+          <a href="#" @click="verticalNavToggle(2)">
+            <span class="mr-3">
+              <i class="fas fa-warehouse"></i>
+            </span>
+            <span>Management</span>
+            <span class="float-right" v-if="subMenuList[2]==false">
+              <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </a>
+          <transition name="fade">
+            <ul class="sub-navlist" v-if="subMenuList[2]==true">
               <li>
                 <a href="#">Leave System</a>
               </li>
@@ -60,17 +120,20 @@
           </transition>
         </li>
         <li>
-          <a href="#" @click="verticalNavToggle(2)">
+          <a href="#" @click="verticalNavToggle(3)">
             <span class="mr-3">
               <i class="fas fa-cog"></i>
             </span>
             <span>Settings</span>
-            <span class="float-right">
+            <span class="float-right" v-if="subMenuList[3]==false">
               <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
             </span>
           </a>
           <transition name="fade">
-            <ul class="sub-navlist" v-if="subMenuList[2]==true">
+            <ul class="sub-navlist" v-if="subMenuList[3]==true">
               <li>
                 <a href="#">Access Group</a>
               </li>
