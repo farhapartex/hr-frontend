@@ -33,6 +33,11 @@ const routes = [
                         name: "profileView",
                         component: () => import("./components/profile/ProfileView.vue"),
                     },
+                    {
+                        path: "edit",
+                        name: "profileEdit",
+                        component: () => import("./components/Form.vue"),
+                    },
                 ]
             },
             {
