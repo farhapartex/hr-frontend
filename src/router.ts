@@ -23,6 +23,19 @@ const routes = [
                 component: () => import("./components/Dashboard.vue"),
             },
             {
+                path: "profile",
+                name: "profile",
+                redirect: { name: 'profileView' },
+                component: () => import("./components/profile/Profile.vue"),
+                children: [
+                    {
+                        path: "view",
+                        name: "profileView",
+                        component: () => import("./components/profile/ProfileView.vue"),
+                    },
+                ]
+            },
+            {
                 path: "access-group",
                 name: "accessGroup",
                 redirect: { name: 'groupList' },

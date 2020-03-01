@@ -159,7 +159,7 @@
                 <router-link :to="{ name: 'accessGroup' }">Access Group</router-link>
               </li>
               <li>
-                <a href="#">Profile Settings</a>
+                <router-link :to="{ name: 'profile' }">Profile Settings</router-link>
               </li>
             </ul>
           </transition>

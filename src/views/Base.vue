@@ -58,4 +58,12 @@ export default class Base extends Vue {}
 .box-header-nav li a {
   color: #3a3434;
 }
+.page-header,
+.page-content {
+  background: #e6e6e6;
+}
+
+.data-table {
+  background: #ffffff;
+}
 </style>
