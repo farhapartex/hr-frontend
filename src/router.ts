@@ -63,6 +63,24 @@ const routes = [
                     },
                 ]
             },
+            {
+                path: "users",
+                name: "users",
+                redirect: { name: 'userList' },
+                component: () => import("./components/system-user/User.vue"),
+                children: [
+                    {
+                        path: "user-list",
+                        name: "userList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "user-create",
+                        name: "userCreate",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
         ]
     },
 ];

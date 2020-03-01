@@ -105,7 +105,7 @@
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[3]==true" transition="v-fade">
               <li>
-                <a href="#">User List</a>
+                <router-link :to="{ name: 'userList' }">User List</router-link>
               </li>
             </ul>
           </transition>
