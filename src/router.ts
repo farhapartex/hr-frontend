@@ -39,7 +39,7 @@ const routes = [
                         component: () => import("./components/Form.vue"),
                     },
                     {
-                        path: "group-edit",
+                        path: "group-detail",
                         name: "editGroup",
                         component: () => import("./components/Form.vue"),
                     },

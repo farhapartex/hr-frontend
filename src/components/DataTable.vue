@@ -22,12 +22,12 @@
               <td>Super admin</td>
               <td>5</td>
               <td>
-                <a href="#">
+                <router-link :to="{ name: 'editGroup' }">
                   <span class="mr-1">Edit</span>
                   <span>
                     <i class="far fa-edit"></i>
                   </span>
-                </a>
+                </router-link>
                 <span class="ml-2 mr-2">|</span>
                 <a href="#" class="text-danger">
                   <span class="mr-1">Delete</span>
