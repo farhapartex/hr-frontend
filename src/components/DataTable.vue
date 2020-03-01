@@ -192,6 +192,27 @@
             <tr>
               <td>NH007</td>
               <td>Md Nazmul Hasan</td>
+              <td>Founder & CEO</td>
+              <td>FarHaPartex BD</td>
+              <td>
+                <router-link :to="{ name: 'employeeDetail' }">
+                  <span class="mr-1">Edit</span>
+                  <span>
+                    <i class="far fa-edit"></i>
+                  </span>
+                </router-link>
+                <span class="ml-2 mr-2">|</span>
+                <a href="#" class="text-danger">
+                  <span class="mr-1">Delete</span>
+                  <span>
+                    <i class="far fa-trash-alt"></i>
+                  </span>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>NH002</td>
+              <td>Farzana Yesmin</td>
               <td>Software Engineer</td>
               <td>FarHaPartex BD</td>
               <td>

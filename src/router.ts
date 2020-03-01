@@ -97,6 +97,11 @@ const routes = [
                         name: "employeeCreate",
                         component: () => import("./components/Form.vue"),
                     },
+                    {
+                        path: "detail",
+                        name: "employeeDetail",
+                        component: () => import("./components/Form.vue"),
+                    },
                 ]
             },
         ]

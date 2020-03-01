@@ -281,7 +281,10 @@
       </div>
     </div>
 
-    <div class="profile-form pt-3" v-else-if="$route.name == 'employeeCreate'">
+    <div
+      class="profile-form pt-3"
+      v-else-if="$route.name == 'employeeCreate' || $route.name == 'employeeDetail'"
+    >
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-lg-6 col-sm-6">
@@ -304,7 +307,13 @@
                 Designation
                 <span class="text-danger">*</span>
               </label>
-              <input type="text" class="form-control" />
+              <select class="form-control">
+                <option value>Select Designation</option>
+                <option value>No Probation</option>
+                <option value>3 month</option>
+                <option value>6 month</option>
+                <option value>1 year</option>
+              </select>
             </div>
           </div>
         </div>
@@ -340,12 +349,7 @@
                 Salary
                 <span class="text-danger">*</span>
               </label>
-              <select class="form-control">
-                <option value>Select group</option>
-                <option value>Super Admin</option>
-                <option value>Admin</option>
-                <option value>Employee</option>
-              </select>
+              <input type="text" class="form-control" />
             </div>
           </div>
           <div class="col-md-6 col-lg-6 col-sm-6">
