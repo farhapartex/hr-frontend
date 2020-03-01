@@ -47,17 +47,17 @@ const routes = [
                 component: () => import("./components/AccessGroup.vue"),
                 children: [
                     {
-                        path: "group-list",
+                        path: "list",
                         name: "groupList",
                         component: () => import("./components/DataTable.vue"),
                     },
                     {
-                        path: "new-group",
+                        path: "create",
                         name: "newGroup",
                         component: () => import("./components/Form.vue"),
                     },
                     {
-                        path: "group-detail",
+                        path: "detail",
                         name: "editGroup",
                         component: () => import("./components/Form.vue"),
                     },
@@ -70,13 +70,31 @@ const routes = [
                 component: () => import("./components/system-user/User.vue"),
                 children: [
                     {
-                        path: "user-list",
+                        path: "list",
                         name: "userList",
                         component: () => import("./components/DataTable.vue"),
                     },
                     {
-                        path: "user-create",
+                        path: "create",
                         name: "userCreate",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
+            {
+                path: "employee",
+                name: "employee",
+                redirect: { name: 'employeeList' },
+                component: () => import("./components/employee/Employee.vue"),
+                children: [
+                    {
+                        path: "list",
+                        name: "employeeList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "employeeCreate",
                         component: () => import("./components/Form.vue"),
                     },
                 ]

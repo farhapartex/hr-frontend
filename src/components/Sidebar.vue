@@ -84,7 +84,10 @@
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[2]==true" transition="v-fade">
               <li>
-                <a href="#">Employee List</a>
+                <router-link :to="{ name: 'employeeList' }">Employee List</router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'employeeCreate' }">New Employee</router-link>
               </li>
             </ul>
           </transition>
@@ -106,6 +109,9 @@
             <ul class="sub-navlist" v-if="subMenuList[3]==true" transition="v-fade">
               <li>
                 <router-link :to="{ name: 'userList' }">User List</router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'userCreate' }">New User</router-link>
               </li>
             </ul>
           </transition>
