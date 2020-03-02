@@ -132,6 +132,29 @@ const routes = [
                 name: "companyProfile",
                 component: () => import("./components/CompanyProfile.vue"),
             },
+            {
+                path: "company-branch",
+                name: "companyBranch",
+                redirect: { name: 'branchList' },
+                component: () => import("./components/Branch.vue"),
+                children: [
+                    {
+                        path: "list",
+                        name: "branchList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "branchCreate",
+                        component: () => import("./components/Form.vue"),
+                    },
+                    {
+                        path: "detail",
+                        name: "branchDetail",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
         ]
     },
 ];

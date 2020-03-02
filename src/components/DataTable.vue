@@ -289,6 +289,41 @@
           </tbody>
         </table>
       </div>
+
+      <div class="employee-data-table w-100" v-else-if="$route.name == 'branchList'">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Division</th>
+              <th scope="col">Created By</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FarHaPartex Inc.</td>
+              <td>California</td>
+              <td>Md Nazmul Hasan</td>
+              <td>
+                <router-link :to="{ name: 'branchDetail' }">
+                  <span class="mr-1">Edit</span>
+                  <span>
+                    <i class="far fa-edit"></i>
+                  </span>
+                </router-link>
+                <span class="ml-2 mr-2">|</span>
+                <a href="#" class="text-danger">
+                  <span class="mr-1">Delete</span>
+                  <span>
+                    <i class="far fa-trash-alt"></i>
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

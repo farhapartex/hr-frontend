@@ -165,7 +165,7 @@
                 <router-link :to="{ name: 'companyProfile' }">Profile</router-link>
               </li>
               <li>
-                <router-link :to="{ name: 'profile' }">Branch</router-link>
+                <router-link :to="{ name: 'branchList' }">Branch</router-link>
               </li>
             </ul>
           </transition>
