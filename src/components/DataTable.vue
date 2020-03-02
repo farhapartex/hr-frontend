@@ -324,6 +324,46 @@
           </tbody>
         </table>
       </div>
+
+      <div class="employee-data-table w-100" v-else-if="$route.name == 'userApplicationList'">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Apply Date</th>
+              <th scope="col">From Date</th>
+              <th scope="col">To Date</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Type</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CAS-NH007-01</td>
+              <td>28/02/2020</td>
+              <td>01/03/2020</td>
+              <td>05/03/2020</td>
+              <td>5 days</td>
+              <td>Casual</td>
+              <td>
+                <span class="text-success">Approved</span>
+              </td>
+            </tr>
+            <tr>
+              <td>CAS-NH007-02</td>
+              <td>28/02/2020</td>
+              <td>01/03/2020</td>
+              <td>05/03/2020</td>
+              <td>5 days</td>
+              <td>Casual</td>
+              <td>
+                <span class="text-secondary">Not Approved</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

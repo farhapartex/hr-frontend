@@ -160,6 +160,23 @@ const routes = [
                 name: "attendance",
                 component: () => import("./components/Attendance.vue"),
             },
+            {
+                path: "application",
+                name: "application",
+                component: () => import("./components/Application.vue"),
+                children: [
+                    {
+                        path: "my-list",
+                        name: "userApplicationList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "userApplicationCreate",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
         ]
     },
 ];

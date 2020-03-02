@@ -33,7 +33,7 @@
                 <router-link :to="{ name: 'attendance' }">Daily Attendence</router-link>
               </li>
               <li>
-                <a href="#">Visit Application</a>
+                <router-link :to="{ name: 'userApplicationList' }">Visit Application</router-link>
               </li>
               <li>
                 <a href="#">Extra Work</a>
