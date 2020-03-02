@@ -380,6 +380,56 @@
         </div>
       </div>
     </div>
+
+    <div
+      class="profile-form pt-3"
+      v-else-if="$route.name == 'newDesignation' || $route.name == 'editDesignation'"
+    >
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <label>
+                Name
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <label>
+                Experience
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <label>
+                Salary
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6"></div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <input type="submit" class="btn btn-sm btn-success mr-2" value="Save" />
+              <input type="submit" class="btn btn-sm btn-primary mr-2" value="Update" />
+              <input type="submit" class="btn btn-sm btn-warning mr-2" value="Reset" />
+              <router-link :to="{ name: 'designationList' }" class="btn btn-sm btn-danger">Cancel</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -147,6 +147,30 @@
           </transition>
         </li>
         <li>
+          <a href="#" @click="verticalNavToggle(6)">
+            <span class="mr-3">
+              <i class="far fa-clone"></i>
+            </span>
+            <span>Company</span>
+            <span class="float-right" v-if="subMenuList[6]==false">
+              <i class="fas fa-angle-right"></i>
+            </span>
+            <span class="float-right" v-else>
+              <i class="fas fa-chevron-down"></i>
+            </span>
+          </a>
+          <transition name="fade">
+            <ul class="sub-navlist" v-if="subMenuList[6]==true">
+              <li>
+                <router-link :to="{ name: 'companyProfile' }">Profile</router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'profile' }">Branch</router-link>
+              </li>
+            </ul>
+          </transition>
+        </li>
+        <li>
           <a href="#" @click="verticalNavToggle(5)">
             <span class="mr-3">
               <i class="fas fa-cog"></i>
@@ -166,6 +190,9 @@
               </li>
               <li>
                 <router-link :to="{ name: 'profile' }">Profile Settings</router-link>
+              </li>
+              <li>
+                <router-link :to="{ name: 'designation' }">Designation</router-link>
               </li>
             </ul>
           </transition>

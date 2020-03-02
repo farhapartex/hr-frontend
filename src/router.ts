@@ -64,6 +64,29 @@ const routes = [
                 ]
             },
             {
+                path: "designation",
+                name: "designation",
+                redirect: { name: 'designationList' },
+                component: () => import("./components/Designation.vue"),
+                children: [
+                    {
+                        path: "list",
+                        name: "designationList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "newDesignation",
+                        component: () => import("./components/Form.vue"),
+                    },
+                    {
+                        path: "detail",
+                        name: "editDesignation",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
+            {
                 path: "users",
                 name: "users",
                 redirect: { name: 'userList' },
@@ -103,6 +126,11 @@ const routes = [
                         component: () => import("./components/Form.vue"),
                     },
                 ]
+            },
+            {
+                path: "company-profile",
+                name: "companyProfile",
+                component: () => import("./components/CompanyProfile.vue"),
             },
         ]
     },
