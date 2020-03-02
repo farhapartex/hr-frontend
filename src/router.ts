@@ -155,6 +155,11 @@ const routes = [
                     },
                 ]
             },
+            {
+                path: "attendance",
+                name: "attendance",
+                component: () => import("./components/Attendance.vue"),
+            },
         ]
     },
 ];

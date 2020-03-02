@@ -30,7 +30,7 @@
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[0]==true" transition="v-fade">
               <li>
-                <a href="#">Daily Attendence</a>
+                <router-link :to="{ name: 'attendance' }">Daily Attendence</router-link>
               </li>
               <li>
                 <a href="#">Visit Application</a>
@@ -57,7 +57,7 @@
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[1]==true" transition="v-fade">
               <li>
-                <a href="#">Daily Attendence</a>
+                <router-link :to="{ name: 'attendance' }">Daily Attendence</router-link>
               </li>
               <li>
                 <a href="#">Visit Application</a>
