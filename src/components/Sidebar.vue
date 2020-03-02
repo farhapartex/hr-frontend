@@ -36,7 +36,7 @@
                 <router-link :to="{ name: 'userApplicationList' }">Visit Application</router-link>
               </li>
               <li>
-                <a href="#">Extra Work</a>
+                <router-link :to="{ name: 'extraWorkList' }">Extra Work</router-link>
               </li>
             </ul>
           </transition>

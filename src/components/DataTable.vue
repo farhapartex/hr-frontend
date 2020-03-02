@@ -364,6 +364,40 @@
           </tbody>
         </table>
       </div>
+
+      <div class="employee-data-table w-100" v-else-if="$route.name == 'extraWorkList'">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Apply Date</th>
+              <th scope="col">Working Date</th>
+              <th scope="col">Weekday</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EW-NH007-01</td>
+              <td>28/02/2020</td>
+              <td>21/02/2020</td>
+              <td>Monday</td>
+              <td>
+                <span class="text-success">Approved</span>
+              </td>
+            </tr>
+            <tr>
+              <td>EW-NH007-02</td>
+              <td>28/02/2020</td>
+              <td>21/02/2020</td>
+              <td>Monday</td>
+              <td>
+                <span class="text-secondary">Not Approved</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>

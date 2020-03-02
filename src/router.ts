@@ -177,6 +177,23 @@ const routes = [
                     },
                 ]
             },
+            {
+                path: "extrawork",
+                name: "extraWork",
+                component: () => import("./components/ExtraWork.vue"),
+                children: [
+                    {
+                        path: "list",
+                        name: "extraWorkList",
+                        component: () => import("./components/DataTable.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "extraWorkCreate",
+                        component: () => import("./components/Form.vue"),
+                    },
+                ]
+            },
         ]
     },
 ];

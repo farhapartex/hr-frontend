@@ -529,6 +529,55 @@
         </div>
       </div>
     </div>
+
+    <div class="profile-form pt-3" v-else-if="$route.name == 'extraWorkCreate'">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <label>
+                Date
+                <span class="text-danger">*</span>
+              </label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <label>
+                Weekday
+                <span class="text-danger">*</span>
+              </label>
+              <select class="form-control">
+                <option value>Select Weekday</option>
+                <option value>Casual</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="form-group">
+              <label>
+                Cause
+                <span class="text-danger">*</span>
+              </label>
+              <textarea class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6 col-lg-6 col-sm-6">
+            <div class="form-group">
+              <input type="submit" class="btn btn-sm btn-success mr-2" value="Save" />
+              <input type="submit" class="btn btn-sm btn-primary mr-2" value="Update" />
+              <input type="submit" class="btn btn-sm btn-warning mr-2" value="Reset" />
+              <router-link :to="{ name: 'extraWorkList' }" class="btn btn-sm btn-danger">Cancel</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
