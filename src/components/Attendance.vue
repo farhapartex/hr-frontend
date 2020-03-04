@@ -1,11 +1,11 @@
 <template>
   <div class="accessGroup p-4">
-    <div class="page-header w-100 pl-3 pt-2 pb-1 pr-3">
+    <div class="page-header w-100 pl-3 pt-3 pb-3 pr-3">
       <h3>Attendance</h3>
     </div>
 
     <div class="page-content w-100 mt-5 pl-3 pt-2 pb-1 pr-3">
-      <div class="w-100 d-flex flex-row justify-content-center">
+      <div class="w-100 d-flex flex-row justify-content-center pt-3 pb-3">
         <div class="form-group mr-5">
           <p class="mb-2">
             <span class="mr-2">

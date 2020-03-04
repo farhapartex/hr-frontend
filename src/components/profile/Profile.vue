@@ -1,6 +1,6 @@
 <template>
   <div class="accessGroup p-4">
-    <div class="page-header w-100 pl-3 pt-2 pb-1 pr-3">
+    <div class="page-header w-100 pl-3 pt-3 pb-3 pr-3">
       <router-link
         :to="{ name: 'profileEdit' }"
         class="btn btn-sm btn-secondary float-right mt-1"

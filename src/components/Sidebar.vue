@@ -7,12 +7,12 @@
     <div class="w-100 nav-list">
       <ul class="mt-3 navs">
         <li>
-          <a href="#">
+          <router-link :to="{ name: 'dashboard' }">
             <span class="mr-3">
               <i class="fas fa-tachometer-alt"></i>
             </span>
             <span>Dashboard</span>
-          </a>
+          </router-link>
         </li>
         <li>
           <a href="#" @click="verticalNavToggle(0)">
