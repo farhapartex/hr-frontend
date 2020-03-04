@@ -57,13 +57,10 @@
           <transition name="fade">
             <ul class="sub-navlist" v-if="subMenuList[1]==true" transition="v-fade">
               <li>
-                <router-link :to="{ name: 'attendance' }">Daily Attendence</router-link>
+                <router-link :to="{ name: 'attendance' }">Advance Salary</router-link>
               </li>
               <li>
-                <a href="#">Visit Application</a>
-              </li>
-              <li>
-                <a href="#">Extra Work</a>
+                <a href="#">My Payslip</a>
               </li>
             </ul>
           </transition>
