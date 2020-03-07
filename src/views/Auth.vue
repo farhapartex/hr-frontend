@@ -69,6 +69,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { Getter, Action } from "vuex-class";
 import HelloWorld from "@/components/HelloWorld.vue";
 
 @Component({

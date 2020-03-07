@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-2 col-lg-2 col-sm-2 px-0 sidebar position-fixed h-100" id="sticky-sidebar">
-    <div class="company-header-logo w-100 pt-2 pb-2">
+    <div class="company-header-logo w-100 pt-3 pb-2">
       <h5 class="text-center sidebar-header-text">FarHaPartex</h5>
     </div>
 

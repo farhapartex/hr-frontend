@@ -5,8 +5,8 @@
         <Sidebar></Sidebar>
         <div class="col-md-10 col-lg-10 col-sm-10 offset-2 h-100 px-0" id="main">
           <div class="box-header pt-1 pb-1 w-100">
-            <ul class="nav justify-content-end mr-3 box-header-nav">
-              <li class="nav-item">
+            <ul class="nav justify-content-end mr-3 box-header-nav position-relative">
+              <li class="nav-item dropdown">
                 <a class="nav-link" href="#">
                   <span class="mr-1">
                     <i class="far fa-envelope"></i>
@@ -14,7 +14,7 @@
                   <span>(11)</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item dropdown">
                 <a class="nav-link" href="#">
                   <span class="mr-1">
                     <i class="far fa-bell"></i>
@@ -65,5 +65,14 @@ export default class Base extends Vue {}
 
 .data-table {
   background: #ffffff;
+}
+
+.message-list ul {
+  list-style: none;
+}
+
+.message-list ul li {
+  font-size: 12px;
+  border-bottom: 1px solid #cccccc;
 }
 </style>
