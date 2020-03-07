@@ -7,7 +7,7 @@ import {
 } from "../getters.names";
 import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, } from '../endpoints.names';
 import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE } from '../mutations.names';
-import { LOGIN, LOGOUT } from '../actions.names';
+import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE } from '../actions.names';
 import { generateAuthHeader } from '@/utils/auth';
 
 const DEFAULT_AUTH_STATE: AuthState = {
@@ -51,6 +51,9 @@ const actions: ActionTree<AuthState, RootState> = {
                 });
 
         });
+    },
+    [RETRIEVE_AUTH_FROM_STORE]({ state, commit, dispatch }) {
+        commit(GET_AUTH_FROM_STORE);
     },
 };
 
