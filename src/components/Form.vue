@@ -17,83 +17,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Add Super User</td>
+            <tr v-for="(permission, index) in permissions" :key="index">
+              <td>{{permission.name}}</td>
               <td>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Update Super User Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Super User</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Delete Super User</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Add Employee</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Employee Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Employee Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Employee Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Employee Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>View Employee Details</td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value />
+                  <input class="form-check-input" type="checkbox" :value="permission.id" />
                 </div>
               </td>
             </tr>
@@ -583,13 +511,27 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { Getter, Action } from "vuex-class";
+import { GET_PERMISSION_LIST } from "../store/actions.names";
 
 @Component({
   name: "Form",
   components: {}
 })
-export default class Form extends Vue {}
+export default class Form extends Vue {
+  @Action(GET_PERMISSION_LIST) getPermissionList: any;
+  permissions: any = [];
+
+  mounted() {
+    if (this.$route.name == "newGroup" || this.$route.name == "editGroup") {
+      this.getPermissionList()
+        .then((result: any) => {
+          this.permissions = result;
+        })
+        .catch((e: any) => {});
+    }
+  }
+}
 </script>
 
 

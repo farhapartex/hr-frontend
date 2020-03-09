@@ -23,6 +23,7 @@ export interface AuthState {
     token: string | null;
     user: User | null;
     accessLevel: number | null;
+    permissions: [],
     error: boolean;
 }
 

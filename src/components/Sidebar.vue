@@ -195,7 +195,7 @@
           </transition>
         </li>
         <li>
-          <a href="#">
+          <a href="#" @click="userLogout">
             <span class="mr-3">
               <i class="fas fa-sign-out-alt"></i>
             </span>
@@ -209,13 +209,16 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { Action, Getter } from "vuex-class";
+import { LOGOUT } from "../store/actions.names";
 
 @Component({
   name: "Sidebar",
   components: {}
 })
 export default class Sidebar extends Vue {
+  @Action(LOGOUT) logout: any;
+
   subMenuList: any = [false, false, false, false, false, false, false, false];
 
   verticalNavToggle(index: number) {
@@ -224,6 +227,14 @@ export default class Sidebar extends Vue {
       JSON.stringify([false, false, false, false, false, false, false, false])
     );
     Vue.set(this.subMenuList, index, !listValue);
+  }
+
+  userLogout() {
+    this.logout()
+      .then((data: any) => {
+        this.$router.push("/auth");
+      })
+      .catch((e: any) => {});
   }
 }
 </script>

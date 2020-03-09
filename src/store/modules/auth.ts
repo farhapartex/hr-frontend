@@ -3,16 +3,17 @@ import { GetterTree, ActionTree, MutationTree, Module } from "vuex";
 import vue from "vue";
 import axios from "axios";
 import {
-    ACCESS_TOKEN,
+    ACCESS_TOKEN, PERMISSIONS,
 } from "../getters.names";
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, } from '../endpoints.names';
-import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE } from '../mutations.names';
-import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE } from '../actions.names';
+import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, } from '../endpoints.names';
+import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE, SET_PERMISSIONS, SET_PERMISSION_ERROR } from '../mutations.names';
+import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST } from '../actions.names';
 import { generateAuthHeader } from '@/utils/auth';
 
 const DEFAULT_AUTH_STATE: AuthState = {
     token: null,
     user: null,
+    permissions: [],
     error: false,
     accessLevel: null
 };
@@ -22,6 +23,9 @@ export const state: AuthState = JSON.parse(JSON.stringify(DEFAULT_AUTH_STATE));
 const getters: GetterTree<AuthState, RootState> = {
     [ACCESS_TOKEN](state): string | null {
         return state.token;
+    },
+    [PERMISSIONS](state): [] {
+        return state.permissions;
     },
 };
 
@@ -55,6 +59,19 @@ const actions: ActionTree<AuthState, RootState> = {
     [RETRIEVE_AUTH_FROM_STORE]({ state, commit, dispatch }) {
         commit(GET_AUTH_FROM_STORE);
     },
+    async [GET_PERMISSION_LIST]({ commit }): Promise<any> {
+        return new Promise((resolve, reject) => {
+            axios
+                .get(PERMISSION_ENDPOINT, generateAuthHeader(state.token))
+                .then(({ data }) => {
+                    resolve(data);
+                })
+                .catch(e => {
+                    reject(e);
+                });
+
+        });
+    },
 };
 
 const mutations: MutationTree<AuthState> = {
@@ -82,6 +99,14 @@ const mutations: MutationTree<AuthState> = {
             state.token = token;
             state.error = false;
         }
+    },
+    [SET_PERMISSIONS](state, payload: []) {
+        state.permissions = payload;
+        state.error = false;
+    },
+    [SET_PERMISSION_ERROR](state) {
+        state.error = true;
+        state.permissions = [];
     },
 };
 
