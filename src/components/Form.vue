@@ -524,7 +524,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
-import { GET_PERMISSION_LIST, CREATE_GROUP } from "../store/actions.names";
+import {
+  GET_PERMISSION_LIST,
+  CREATE_GROUP,
+  GROUP_LIST
+} from "../store/actions.names";
 import { Group } from "../store/store.types";
 
 @Component({
@@ -534,6 +538,7 @@ import { Group } from "../store/store.types";
 export default class Form extends Vue {
   @Action(GET_PERMISSION_LIST) getPermissionList: any;
   @Action(CREATE_GROUP) createGroup: any;
+
   permissions: any = [];
   checkedList: any = [];
   group: Group = {

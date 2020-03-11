@@ -13,14 +13,16 @@
           <thead>
             <tr>
               <th scope="col">Group Name</th>
-              <th scope="col">Permissions</th>
+              <th scope="col">Total Permission</th>
+              <th scope="col">Total User</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Super admin</td>
-              <td>5</td>
+            <tr v-for="(group , index) in groups" :key="index">
+              <td>{{group.name}}</td>
+              <td>{{group.total_permission}}</td>
+              <td>{{group.total_user}}</td>
               <td>
                 <router-link :to="{ name: 'editGroup' }">
                   <span class="mr-1">Edit</span>
@@ -28,63 +30,6 @@
                     <i class="far fa-edit"></i>
                   </span>
                 </router-link>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Admin</td>
-              <td>10</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Employee</td>
-              <td>200</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Banned</td>
-              <td>422</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
                 <span class="ml-2 mr-2">|</span>
                 <a href="#" class="text-danger">
                   <span class="mr-1">Delete</span>
@@ -404,11 +349,27 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { Getter, Action } from "vuex-class";
+import { GROUP_LIST } from "../store/actions.names";
 
 @Component({
   name: "DataTable",
   components: {}
 })
-export default class DataTable extends Vue {}
+export default class DataTable extends Vue {
+  @Action(GROUP_LIST) getGroupList: any;
+
+  groups: any = [];
+
+  mounted() {
+    if (this.$route.name == "groupList") {
+      this.getGroupList()
+        .then((result: any) => {
+          this.groups = result;
+          // this.checkedList = new Array(this.permissions.length);
+        })
+        .catch((e: any) => {});
+    }
+  }
+}
 </script>
