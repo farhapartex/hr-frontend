@@ -1,19 +1,20 @@
-import { AuthState, RootState, User, AuthCredential } from "../store.types";
+import { AuthState, RootState, User, AuthCredential, Group } from "../store.types";
 import { GetterTree, ActionTree, MutationTree, Module } from "vuex";
 import vue from "vue";
 import axios from "axios";
 import {
-    ACCESS_TOKEN, PERMISSIONS,
+    ACCESS_TOKEN, PERMISSIONS, GROUPS,
 } from "../getters.names";
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, } from '../endpoints.names';
+import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, GROUP_ENDPOINT, } from '../endpoints.names';
 import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE, SET_PERMISSIONS, SET_PERMISSION_ERROR } from '../mutations.names';
-import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST } from '../actions.names';
+import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST, CREATE_GROUP } from '../actions.names';
 import { generateAuthHeader } from '@/utils/auth';
 
 const DEFAULT_AUTH_STATE: AuthState = {
     token: null,
     user: null,
     permissions: [],
+    group: null,
     error: false,
     accessLevel: null
 };
@@ -70,6 +71,18 @@ const actions: ActionTree<AuthState, RootState> = {
                     reject(e);
                 });
 
+        });
+    },
+    async [CREATE_GROUP]({ rootState, commit }, payload: Group): Promise<any> {
+        return new Promise((resolve, reject) => {
+            axios
+                .post(GROUP_ENDPOINT, payload, generateAuthHeader(rootState.AuthModule.token))
+                .then(({ data }) => {
+                    resolve(data);
+                })
+                .catch((e: any) => {
+                    reject(e);
+                });
         });
     },
 };

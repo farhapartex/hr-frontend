@@ -19,11 +19,17 @@ export interface User {
     last_login: string;
 }
 
+export interface Group {
+    name: string;
+    permissions: [];
+}
+
 export interface AuthState {
     token: string | null;
     user: User | null;
     accessLevel: number | null;
     permissions: [],
+    group: Group | null,
     error: boolean;
 }
 
@@ -31,3 +37,4 @@ export interface AuthCredential {
     username: string;
     password: string;
 }
+
