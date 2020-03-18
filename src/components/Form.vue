@@ -498,6 +498,19 @@ import GroupForm from "../components/forms/group.vue";
 export default class Form extends Vue {
   @Action(CREATE_GROUP) createGroup: any;
 
+  errorMessage: string = "";
+  loginError: boolean = false;
+
+  setErrorMessege(message: string) {
+    this.loginError = true;
+    this.errorMessage = message;
+  }
+
+  removeErrorMessege() {
+    this.loginError = false;
+    this.errorMessage = "";
+  }
+
   mounted() {}
 }
 </script>

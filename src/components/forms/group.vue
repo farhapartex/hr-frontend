@@ -51,7 +51,8 @@ import { Getter, Action } from "vuex-class";
 import {
   GET_PERMISSION_LIST,
   CREATE_GROUP,
-  GROUP_LIST
+  GROUP_LIST,
+  RETRIEVE_GROUP
 } from "../../store/actions.names";
 import { Group } from "../../store/store.types";
 
@@ -62,6 +63,7 @@ import { Group } from "../../store/store.types";
 export default class GroupForm extends Vue {
   @Action(GET_PERMISSION_LIST) getPermissionList: any;
   @Action(CREATE_GROUP) createGroup: any;
+  @Action(RETRIEVE_GROUP) retrieveGroup: any;
 
   permissions: any = [];
   checkedList: any = [];
@@ -108,8 +110,22 @@ export default class GroupForm extends Vue {
       .catch((e: any) => {});
   }
 
+  retrieveData() {
+    this.retrieveGroup({ id: this.$route.params.id })
+      .then((result: any) => {
+        this.group = result;
+        console.log(this.group.permissions);
+        this.checkedList = JSON.parse(JSON.stringify(this.group.permissions));
+        // this.checkedList = new Array(this.permissions.length);
+      })
+      .catch((e: any) => {});
+  }
+
   mounted() {
     this.fetchPermissionList();
+    if (this.$route.name == "editGroup") {
+      this.retrieveData();
+    }
   }
 }
 </script>
