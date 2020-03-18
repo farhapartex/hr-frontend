@@ -47,7 +47,7 @@ const routes = [
                     {
                         path: "edit",
                         name: "profileEdit",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -64,7 +64,7 @@ const routes = [
                     {
                         path: "list",
                         name: "groupList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -73,7 +73,7 @@ const routes = [
                     {
                         path: "create",
                         name: "newGroup",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -82,7 +82,7 @@ const routes = [
                     {
                         path: ":id/detail",
                         name: "editGroup",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -99,7 +99,7 @@ const routes = [
                     {
                         path: "list",
                         name: "designationList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -108,7 +108,7 @@ const routes = [
                     {
                         path: "create",
                         name: "newDesignation",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -117,7 +117,7 @@ const routes = [
                     {
                         path: "detail",
                         name: "editDesignation",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -134,7 +134,7 @@ const routes = [
                     {
                         path: "list",
                         name: "userList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -143,7 +143,7 @@ const routes = [
                     {
                         path: "create",
                         name: "userCreate",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -160,7 +160,7 @@ const routes = [
                     {
                         path: "list",
                         name: "employeeList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -169,7 +169,7 @@ const routes = [
                     {
                         path: "create",
                         name: "employeeCreate",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -178,7 +178,7 @@ const routes = [
                     {
                         path: "detail",
                         name: "employeeDetail",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -204,7 +204,7 @@ const routes = [
                     {
                         path: "list",
                         name: "branchList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -213,7 +213,7 @@ const routes = [
                     {
                         path: "create",
                         name: "branchCreate",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -222,7 +222,7 @@ const routes = [
                     {
                         path: "detail",
                         name: "branchDetail",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -247,7 +247,7 @@ const routes = [
                     {
                         path: "my-list",
                         name: "userApplicationList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -256,7 +256,7 @@ const routes = [
                     {
                         path: "create",
                         name: "userApplicationCreate",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -272,7 +272,7 @@ const routes = [
                     {
                         path: "list",
                         name: "extraWorkList",
-                        component: () => import("./components/DataTable.vue"),
+                        component: () => import("./components/tables/DataTable.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0
@@ -281,7 +281,7 @@ const routes = [
                     {
                         path: "create",
                         name: "extraWorkCreate",
-                        component: () => import("./components/Form.vue"),
+                        component: () => import("./components/forms/Form.vue"),
                         meta: {
                             authRequired: true,
                             access_level: 0

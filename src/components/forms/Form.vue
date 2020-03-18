@@ -490,9 +490,9 @@ import {
   GET_PERMISSION_LIST,
   CREATE_GROUP,
   GROUP_LIST
-} from "../store/actions.names";
-import { Group } from "../store/store.types";
-import GroupForm from "../components/forms/group.vue";
+} from "../../store/actions.names";
+import { Group } from "../../store/store.types";
+import GroupForm from "./group.vue";
 
 @Component({
   name: "Form",
