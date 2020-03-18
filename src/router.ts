@@ -80,7 +80,7 @@ const routes = [
                         },
                     },
                     {
-                        path: "detail",
+                        path: ":id/detail",
                         name: "editGroup",
                         component: () => import("./components/Form.vue"),
                         meta: {

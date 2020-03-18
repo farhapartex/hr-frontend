@@ -24,7 +24,7 @@
               <td>{{group.total_permission}}</td>
               <td>{{group.total_user}}</td>
               <td>
-                <router-link :to="{ name: 'editGroup' }">
+                <router-link :to="{ name: 'editGroup', params: {id: group.id} }">
                   <span class="mr-1">Edit</span>
                   <span>
                     <i class="far fa-edit"></i>
