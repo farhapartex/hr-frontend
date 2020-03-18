@@ -5,48 +5,10 @@
       role="alert"
       v-if="loginError==true"
     >{{errorMessage}}</div>
-    <div
-      class="access-group-form pt-3"
+    <GroupForm
       v-if="$route.name == 'editGroup' || $route.name == 'newGroup'"
-    >
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Group Name" v-model="group.name" />
-      </div>
-
-      <div class="permission-table">
-        <table class="table table-borderless">
-          <thead>
-            <tr>
-              <th scope="col">Permission</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(permission, index) in permissions" :key="index">
-              <td>{{permission.name}}</td>
-              <td>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    :value="permission.id"
-                    :id="permission.id"
-                    v-model="checkedList"
-                    @click="storeCheckValue($event)"
-                  />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="form-group">
-        <input type="submit" class="btn btn-sm btn-primary mr-2" value="Save" @click="saveGroup" />
-        <input type="submit" class="btn btn-sm btn-warning mr-2" value="Reset" />
-        <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-danger">Cancel</router-link>
-      </div>
-    </div>
+      @getStatus="setStatus"
+    ></GroupForm>
 
     <div class="profile-form pt-3" v-else-if="$route.name == 'profileEdit'">
       <div class="container-fluid">
@@ -524,28 +486,20 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
-import { GET_PERMISSION_LIST, CREATE_GROUP } from "../store/actions.names";
-import { Group } from "../store/store.types";
+import {
+  GET_PERMISSION_LIST,
+  CREATE_GROUP,
+  GROUP_LIST
+} from "../../store/actions.names";
+import { Group } from "../../store/store.types";
+import GroupForm from "./group.vue";
 
 @Component({
   name: "Form",
-  components: {}
+  components: { GroupForm }
 })
 export default class Form extends Vue {
-  @Action(GET_PERMISSION_LIST) getPermissionList: any;
   @Action(CREATE_GROUP) createGroup: any;
-  permissions: any = [];
-  checkedList: any = [];
-  group: Group = {
-    name: "",
-    permissions: []
-  };
-
-  storeCheckValue(e: any) {
-    if (e.target.checked) {
-      this.checkedList.push(parseInt(e.target.value));
-    }
-  }
 
   errorMessage: string = "";
   loginError: boolean = false;
@@ -560,40 +514,18 @@ export default class Form extends Vue {
     this.errorMessage = "";
   }
 
-  groupFormValidation(val: any) {
-    if (val.length == 0 || val == null || val == "") {
-      return false;
-    }
-
-    return true;
-  }
-
-  saveGroup() {
-    let newGroup = JSON.parse(JSON.stringify(this.group));
-    delete newGroup.permissions;
-
-    if (this.groupFormValidation(newGroup.name)) {
-      this.group.permissions = this.checkedList;
-      this.createGroup(this.group)
-        .then((result: any) => {
-          this.$router.push("/access-group");
-        })
-        .catch((e: any) => {});
+  setStatus(status: any) {
+    console.log(status);
+    if (status == "validationError") {
+      this.setErrorMessege("Form validation error");
+    } else if (status == "serverError") {
+      this.setErrorMessege("Server error! Try again");
     } else {
-      this.setErrorMessege("Form not valid");
+      this.removeErrorMessege();
     }
   }
 
-  mounted() {
-    if (this.$route.name == "newGroup" || this.$route.name == "editGroup") {
-      this.getPermissionList()
-        .then((result: any) => {
-          this.permissions = result;
-          // this.checkedList = new Array(this.permissions.length);
-        })
-        .catch((e: any) => {});
-    }
-  }
+  mounted() {}
 }
 </script>
 

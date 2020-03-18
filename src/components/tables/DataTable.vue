@@ -7,96 +7,7 @@
         </div>
         <p class="p-2">Data Table</p>
       </div>
-
-      <div class="group-data-table w-100" v-if="$route.name == 'groupList'">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">Group Name</th>
-              <th scope="col">Permissions</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Super admin</td>
-              <td>5</td>
-              <td>
-                <router-link :to="{ name: 'editGroup' }">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </router-link>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Admin</td>
-              <td>10</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Employee</td>
-              <td>200</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Banned</td>
-              <td>422</td>
-              <td>
-                <a href="#">
-                  <span class="mr-1">Edit</span>
-                  <span>
-                    <i class="far fa-edit"></i>
-                  </span>
-                </a>
-                <span class="ml-2 mr-2">|</span>
-                <a href="#" class="text-danger">
-                  <span class="mr-1">Delete</span>
-                  <span>
-                    <i class="far fa-trash-alt"></i>
-                  </span>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <GroupTable v-if="$route.name == 'groupList'"></GroupTable>
 
       <div class="group-data-table w-100" v-else-if="$route.name == 'userList'">
         <table class="table table-bordered">
@@ -404,11 +315,15 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import HelloWorld from "@/components/HelloWorld.vue";
+import { Getter, Action } from "vuex-class";
+import { GROUP_LIST } from "../../store/actions.names";
+import GroupTable from "../tables/GroupTable.vue";
 
 @Component({
   name: "DataTable",
-  components: {}
+  components: { GroupTable }
 })
-export default class DataTable extends Vue {}
+export default class DataTable extends Vue {
+  mounted() {}
+}
 </script>
