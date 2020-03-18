@@ -48,11 +48,22 @@
           type="submit"
           class="btn btn-sm btn-success mr-2"
           value="Update"
-          v-else-if="$route.name == 'editGroup'"
+          v-if="$route.name == 'editGroup'"
           @click="groupAction"
         />
-        <input type="submit" class="btn btn-sm btn-warning mr-2" value="Reset" />
-        <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-danger">Cancel</router-link>
+        <input
+          type="submit"
+          class="btn btn-sm btn-warning mr-2"
+          v-if="$route.name == 'newGroup'"
+          value="Reset"
+        />
+        <input
+          type="submit"
+          class="btn btn-sm btn-danger mr-2"
+          v-if="$route.name == 'editGroup'"
+          value="Delete"
+        />
+        <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-secondary">Cancel</router-link>
       </div>
     </div>
   </div>
@@ -118,7 +129,7 @@ export default class GroupForm extends Vue {
     if (this.groupFormValidation(newGroup.name)) {
       this.group.permissions = this.checkedList;
       if (this.$route.name == "newGroup") {
-        // this.saveGroup(this.group);
+        this.saveGroup(this.group);
       } else if (this.$route.name == "editGroup") {
         console.log(this.group);
         this.updateGroup(this.group)

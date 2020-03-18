@@ -7,7 +7,7 @@ import {
 } from "../getters.names";
 import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, GROUP_ENDPOINT, } from '../endpoints.names';
 import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE, SET_PERMISSIONS, SET_PERMISSION_ERROR } from '../mutations.names';
-import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST, CREATE_GROUP, GROUP_LIST, RETRIEVE_GROUP, UPDATE_GROUP } from '../actions.names';
+import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST, CREATE_GROUP, GROUP_LIST, RETRIEVE_GROUP, UPDATE_GROUP, DELETE_GROUP } from '../actions.names';
 import { generateAuthHeader } from '@/utils/auth';
 
 const DEFAULT_AUTH_STATE: AuthState = {
@@ -112,10 +112,22 @@ const actions: ActionTree<AuthState, RootState> = {
     },
     async [UPDATE_GROUP]({ rootState, commit }, payload: any): Promise<any> {
         return new Promise((resolve, reject) => {
-            console.log("updating");
             let url = GROUP_ENDPOINT + payload.id + "/";
             axios
                 .patch(url, payload, generateAuthHeader(rootState.AuthModule.token))
+                .then(({ data }) => {
+                    resolve(data);
+                })
+                .catch((e: any) => {
+                    reject(e);
+                });
+        });
+    },
+    async [DELETE_GROUP]({ rootState, commit }, payload: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            let url = GROUP_ENDPOINT + payload.id + "/";
+            axios
+                .delete(url, generateAuthHeader(rootState.AuthModule.token))
                 .then(({ data }) => {
                     resolve(data);
                 })
