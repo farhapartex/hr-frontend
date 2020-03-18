@@ -5,7 +5,10 @@
       role="alert"
       v-if="loginError==true"
     >{{errorMessage}}</div>
-    <GroupForm v-if="$route.name == 'editGroup' || $route.name == 'newGroup'"></GroupForm>
+    <GroupForm
+      v-if="$route.name == 'editGroup' || $route.name == 'newGroup'"
+      @getStatus="setStatus"
+    ></GroupForm>
 
     <div class="profile-form pt-3" v-else-if="$route.name == 'profileEdit'">
       <div class="container-fluid">
@@ -509,6 +512,17 @@ export default class Form extends Vue {
   removeErrorMessege() {
     this.loginError = false;
     this.errorMessage = "";
+  }
+
+  setStatus(status: any) {
+    console.log(status);
+    if (status == "validationError") {
+      this.setErrorMessege("Form validation error");
+    } else if (status == "serverError") {
+      this.setErrorMessege("Server error! Try again");
+    } else {
+      this.removeErrorMessege();
+    }
   }
 
   mounted() {}
