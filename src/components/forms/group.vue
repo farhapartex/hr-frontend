@@ -1,9 +1,7 @@
 <template>
   <div class="access-group-form pt-3">
-    <div
-      class="access-group-form pt-3"
-      v-if="$route.name == 'editGroup' || $route.name == 'newGroup'"
-    >
+    <Error404 v-if="showErrorPage == true"></Error404>
+    <div v-else class="access-group-form pt-3">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Group Name" v-model="group.name" />
       </div>
@@ -62,8 +60,36 @@
           class="btn btn-sm btn-danger mr-2"
           v-if="$route.name == 'editGroup'"
           value="Delete"
+          data-toggle="modal"
+          data-target="#groupDeleteModal"
         />
         <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-secondary">Cancel</router-link>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="groupDeleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title text-danger" id="exampleModalLabel">Warning</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Are you sure, want to delete this group?</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-sm btn-danger" @click="removeData()">Delete</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -77,24 +103,30 @@ import {
   CREATE_GROUP,
   GROUP_LIST,
   RETRIEVE_GROUP,
-  UPDATE_GROUP
+  UPDATE_GROUP,
+  DELETE_GROUP
 } from "../../store/actions.names";
 import { Group } from "../../store/store.types";
+import Error404 from "../errors/Error404.vue";
 
 @Component({
   name: "GroupForm",
-  components: {}
+  components: { Error404 }
 })
 export default class GroupForm extends Vue {
   @Action(GET_PERMISSION_LIST) getPermissionList: any;
   @Action(CREATE_GROUP) createGroup: any;
   @Action(RETRIEVE_GROUP) retrieveGroup: any;
   @Action(UPDATE_GROUP) updateGroup: any;
+  @Action(DELETE_GROUP) deleteGroup: any;
 
   @Prop() readonly status: any;
 
   permissions: any = [];
   checkedList: any = [];
+  data: any = null;
+  showErrorPage: boolean = false;
+
   group: Group = {
     name: "",
     permissions: []
@@ -160,6 +192,25 @@ export default class GroupForm extends Vue {
         this.group = result;
         this.checkedList = JSON.parse(JSON.stringify(this.group.permissions));
         // this.checkedList = new Array(this.permissions.length);
+      })
+      .catch((e: any) => {
+        if (e.response.status == 404) {
+          this.showErrorPage = true;
+        }
+        console.log(e.response.status);
+      });
+  }
+
+  passData(payload: any) {
+    this.data = payload;
+  }
+
+  removeData() {
+    this.deleteGroup(this.group)
+      .then((result: any) => {
+        this.data = null;
+        console.log(result);
+        this.$router.push({ name: "groupList" });
       })
       .catch((e: any) => {});
   }
