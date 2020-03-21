@@ -15,8 +15,8 @@ export interface User {
     last_name: string;
     email: string;
     full_name: string;
-    image: string;
     last_login: string;
+    date_joined: string;
 }
 
 export interface Group {
