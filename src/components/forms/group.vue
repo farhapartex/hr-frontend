@@ -1,9 +1,36 @@
 <template>
   <div class="access-group-form pt-3">
-    <Error404 v-if="showErrorPage == true"></Error404>
+    <Error v-if="showErrorPage == true" :error="errorValue" :pathName="'groupList'"></Error>
     <div v-else class="access-group-form pt-3">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Group Name" v-model="group.name" />
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="groupDeleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        v-if="showModal"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title text-danger" id="exampleModalLabel">Warning</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Are you sure, want to delete this group?</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-sm btn-danger" @click="removeData()">Delete</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="permission-table">
@@ -60,36 +87,11 @@
           class="btn btn-sm btn-danger mr-2"
           v-if="$route.name == 'editGroup'"
           value="Delete"
+          @click="passData"
           data-toggle="modal"
           data-target="#groupDeleteModal"
         />
         <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-secondary">Cancel</router-link>
-      </div>
-
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="groupDeleteModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h6 class="modal-title text-danger" id="exampleModalLabel">Warning</h6>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">Are you sure, want to delete this group?</div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-sm btn-danger" @click="removeData()">Delete</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -107,11 +109,11 @@ import {
   DELETE_GROUP
 } from "../../store/actions.names";
 import { Group } from "../../store/store.types";
-import Error404 from "../errors/Error404.vue";
+import Error from "../errors/Error.vue";
 
 @Component({
   name: "GroupForm",
-  components: { Error404 }
+  components: { Error }
 })
 export default class GroupForm extends Vue {
   @Action(GET_PERMISSION_LIST) getPermissionList: any;
@@ -126,6 +128,8 @@ export default class GroupForm extends Vue {
   checkedList: any = [];
   data: any = null;
   showErrorPage: boolean = false;
+  showModal: boolean = false;
+  errorValue: number = null;
 
   group: Group = {
     name: "",
@@ -189,6 +193,7 @@ export default class GroupForm extends Vue {
   retrieveData() {
     this.retrieveGroup({ id: this.$route.params.id })
       .then((result: any) => {
+        this.showModal = true;
         this.group = result;
         this.checkedList = JSON.parse(JSON.stringify(this.group.permissions));
         // this.checkedList = new Array(this.permissions.length);
@@ -196,21 +201,21 @@ export default class GroupForm extends Vue {
       .catch((e: any) => {
         if (e.response.status == 404) {
           this.showErrorPage = true;
+          this.errorValue = 404;
         }
-        console.log(e.response.status);
       });
   }
 
-  passData(payload: any) {
-    this.data = payload;
+  passData() {
+    this.showModal = true;
   }
 
   removeData() {
     this.deleteGroup(this.group)
       .then((result: any) => {
         this.data = null;
-        console.log(result);
-        this.$router.push({ name: "groupList" });
+        this.showModal = false;
+        this.$router.push({ name: "accessGroup" });
       })
       .catch((e: any) => {});
   }
