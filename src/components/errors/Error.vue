@@ -1,6 +1,6 @@
 <template>
-  <Error404 v-if="error==404" :pathName="pathName"></Error404>
-  <Error500 v-else-if="error==500" :pathName="pathName"></Error500>
+  <Error404 v-if="error==404" :pathName="name"></Error404>
+  <Error500 v-else-if="error==500" :pathName="name"></Error500>
 </template>
 
 <script lang="ts">
@@ -14,8 +14,8 @@ import Error500 from "./Error500.vue";
   components: { Error404, Error500 }
 })
 export default class Error extends Vue {
-  @Prop() readonly error: number;
-  @Prop() readonly pathName: string;
+  @Prop() readonly error!: number;
+  @Prop() readonly name!: string;
 }
 </script>
 

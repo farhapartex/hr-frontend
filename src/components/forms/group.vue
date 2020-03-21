@@ -1,6 +1,6 @@
 <template>
   <div class="access-group-form pt-3">
-    <Error v-if="showErrorPage == true" :error="errorValue" :pathName="'groupList'"></Error>
+    <Error v-if="showErrorPage == true" :error="errorValue" :name="'groupList'"></Error>
     <div v-else class="access-group-form pt-3">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Group Name" v-model="group.name" />
@@ -129,7 +129,7 @@ export default class GroupForm extends Vue {
   data: any = null;
   showErrorPage: boolean = false;
   showModal: boolean = false;
-  errorValue: number = null;
+  errorValue: any = null;
 
   group: Group = {
     name: "",

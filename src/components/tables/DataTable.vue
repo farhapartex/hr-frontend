@@ -3,9 +3,15 @@
     <div class="table">
       <div class="page-cnt-head w-100 pt-2 pb-2 overflow-hidden">
         <div class="form-group float-right">
-          <input type="text" class="form-control" placeholder="Search" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search"
+            v-modal="searchData"
+            v-on:keyup.enter="search"
+          />
         </div>
-        <p class="p-2">Data Table</p>
+        <p class="p-2">Data Table {{ searchData }}</p>
       </div>
       <GroupTable v-if="$route.name == 'groupList'"></GroupTable>
 
@@ -324,6 +330,11 @@ import GroupTable from "../tables/GroupTable.vue";
   components: { GroupTable }
 })
 export default class DataTable extends Vue {
+  searchData: string = "";
+
+  search() {
+    console.log("Hasan" + this.searchData);
+  }
   mounted() {}
 }
 </script>

@@ -19,7 +19,7 @@ import { Getter, Action } from "vuex-class";
   components: {}
 })
 export default class Error404 extends Vue {
-  @Prop() readonly pathName: string;
+  @Prop() readonly pathName!: string;
 }
 </script>
 
