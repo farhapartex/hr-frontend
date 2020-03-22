@@ -1,11 +1,36 @@
 <template>
   <div class="access-group-form pt-3">
-    <div
-      class="access-group-form pt-3"
-      v-if="$route.name == 'editGroup' || $route.name == 'newGroup'"
-    >
+    <Error v-if="showErrorPage == true" :error="errorValue" :name="'groupList'"></Error>
+    <div v-else class="access-group-form pt-3">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Group Name" v-model="group.name" />
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="groupDeleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        v-if="showModal"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title text-danger" id="exampleModalLabel">Warning</h6>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">Are you sure, want to delete this group?</div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-sm btn-danger" @click="removeData()">Delete</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="permission-table">
@@ -62,6 +87,9 @@
           class="btn btn-sm btn-danger mr-2"
           v-if="$route.name == 'editGroup'"
           value="Delete"
+          @click="passData"
+          data-toggle="modal"
+          data-target="#groupDeleteModal"
         />
         <router-link :to="{ name: 'groupList' }" class="btn btn-sm btn-secondary">Cancel</router-link>
       </div>
@@ -77,24 +105,32 @@ import {
   CREATE_GROUP,
   GROUP_LIST,
   RETRIEVE_GROUP,
-  UPDATE_GROUP
+  UPDATE_GROUP,
+  DELETE_GROUP
 } from "../../store/actions.names";
 import { Group } from "../../store/store.types";
+import Error from "../errors/Error.vue";
 
 @Component({
   name: "GroupForm",
-  components: {}
+  components: { Error }
 })
 export default class GroupForm extends Vue {
   @Action(GET_PERMISSION_LIST) getPermissionList: any;
   @Action(CREATE_GROUP) createGroup: any;
   @Action(RETRIEVE_GROUP) retrieveGroup: any;
   @Action(UPDATE_GROUP) updateGroup: any;
+  @Action(DELETE_GROUP) deleteGroup: any;
 
   @Prop() readonly status: any;
 
   permissions: any = [];
   checkedList: any = [];
+  data: any = null;
+  showErrorPage: boolean = false;
+  showModal: boolean = false;
+  errorValue: any = null;
+
   group: Group = {
     name: "",
     permissions: []
@@ -157,9 +193,29 @@ export default class GroupForm extends Vue {
   retrieveData() {
     this.retrieveGroup({ id: this.$route.params.id })
       .then((result: any) => {
+        this.showModal = true;
         this.group = result;
         this.checkedList = JSON.parse(JSON.stringify(this.group.permissions));
         // this.checkedList = new Array(this.permissions.length);
+      })
+      .catch((e: any) => {
+        if (e.response.status == 404) {
+          this.showErrorPage = true;
+          this.errorValue = 404;
+        }
+      });
+  }
+
+  passData() {
+    this.showModal = true;
+  }
+
+  removeData() {
+    this.deleteGroup(this.group)
+      .then((result: any) => {
+        this.data = null;
+        this.showModal = false;
+        this.$router.push({ name: "accessGroup" });
       })
       .catch((e: any) => {});
   }

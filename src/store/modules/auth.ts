@@ -5,9 +5,9 @@ import axios from "axios";
 import {
     ACCESS_TOKEN, PERMISSIONS, GROUPS,
 } from "../getters.names";
-import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, GROUP_ENDPOINT, } from '../endpoints.names';
-import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE, SET_PERMISSIONS, SET_PERMISSION_ERROR } from '../mutations.names';
-import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST, CREATE_GROUP, GROUP_LIST, RETRIEVE_GROUP, UPDATE_GROUP, DELETE_GROUP } from '../actions.names';
+import { LOGIN_ENDPOINT, LOGOUT_ENDPOINT, PERMISSION_ENDPOINT, GROUP_ENDPOINT, LOGGED_IN_USER, } from '../endpoints.names';
+import { SET_AUTH, SET_AUTH_ERROR, CLEAR_AUTH, GET_AUTH_FROM_STORE, SET_PERMISSIONS, SET_PERMISSION_ERROR, SET_LOGGED_IN_USER_INFO, SET_LOGGED_IN_USER_INFO_ERROR } from '../mutations.names';
+import { LOGIN, LOGOUT, RETRIEVE_AUTH_FROM_STORE, GET_PERMISSION_LIST, CREATE_GROUP, GROUP_LIST, RETRIEVE_GROUP, UPDATE_GROUP, DELETE_GROUP, FETCH_PROFILE } from '../actions.names';
 import { generateAuthHeader } from '@/utils/auth';
 
 const DEFAULT_AUTH_STATE: AuthState = {
@@ -28,6 +28,9 @@ const getters: GetterTree<AuthState, RootState> = {
     [PERMISSIONS](state): [] {
         return state.permissions;
     },
+    [LOGGED_IN_USER](state): any | null {
+        return state.user;
+    },
 };
 
 const actions: ActionTree<AuthState, RootState> = {
@@ -37,7 +40,7 @@ const actions: ActionTree<AuthState, RootState> = {
             .then(({ data }) => {
                 const token = data.key;
                 commit(SET_AUTH, token);
-                // dispatch(FETCH_PROFILE);
+                dispatch(FETCH_PROFILE);
             })
             .catch(e => {
                 commit(SET_AUTH_ERROR);
@@ -56,6 +59,16 @@ const actions: ActionTree<AuthState, RootState> = {
                 });
 
         });
+    },
+    async [FETCH_PROFILE]({ rootState, commit }): Promise<any> {
+        axios
+            .get(LOGGED_IN_USER, generateAuthHeader(rootState.AuthModule.token))
+            .then(({ data }) => {
+                commit(SET_LOGGED_IN_USER_INFO, data);
+            })
+            .catch(e => {
+                commit(SET_LOGGED_IN_USER_INFO_ERROR)
+            });
     },
     [RETRIEVE_AUTH_FROM_STORE]({ state, commit, dispatch }) {
         commit(GET_AUTH_FROM_STORE);
@@ -171,6 +184,14 @@ const mutations: MutationTree<AuthState> = {
     [SET_PERMISSION_ERROR](state) {
         state.error = true;
         state.permissions = [];
+    },
+    [SET_LOGGED_IN_USER_INFO](state, payload: any) {
+        state.user = payload;
+        state.error = false;
+    },
+    [SET_LOGGED_IN_USER_INFO_ERROR](state) {
+        state.user = null;
+        state.error = true;
     },
 };
 
